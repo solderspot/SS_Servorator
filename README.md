@@ -1,11 +1,11 @@
 SS_Servorator
 =============
 
-An Arduino library that provides simple servo speed control.
+An Arduino library that provides simple speed control for servos.
 
 How To Use
 ----------
 
-Look at [Servorator16.ino](https://github.com/solderspot/Servo16/blob/master/Servorator16.ino) in the [Servo16](https://github.com/solderspot/Servo16) repo.
+Docs in progress.
 
  
