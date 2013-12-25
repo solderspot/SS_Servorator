@@ -75,6 +75,9 @@ class SS_Servorator
   void setServoAngle( SS_Index servo, SS_Angle new_angle);          // set new angle for servo at index
   void setServoMaxRate( SS_Index servo, SS_AngleRate max );         // set max rate for all servos (in milliseconds per degree)
 
+  SS_Angle getServoCurrentAngle( SS_Index servo);
+  SS_AngleRate getServoMaxRate( SS_Index servo );
+
   int numServos( void ) { return _num_servos;}
 
   void service( void ); // service and update all servos

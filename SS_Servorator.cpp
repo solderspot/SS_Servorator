@@ -141,6 +141,36 @@ void SS_Servorator::setServoMaxRate( SS_Index index, SS_AngleRate max )
 //
 //----------------------------------------
 
+SS_Angle SS_Servorator::getServoCurrentAngle( SS_Index index)
+{
+    SS_Servo *servo = get_servo(index);
+    if ( servo )
+    {
+        return servo->current_angle;
+    }
+
+    return SS_NO_ANGLE;
+}
+
+//----------------------------------------
+//
+//----------------------------------------
+
+SS_AngleRate SS_Servorator::getServoMaxRate( SS_Index index )
+{
+    SS_Servo *servo = get_servo(index);
+    if ( servo )
+    {
+        return servo->max_rate;
+    }
+
+    return 0;
+}
+
+//----------------------------------------
+//
+//----------------------------------------
+
 void SS_Servorator::update_servo( SS_Servo *servo, SS_Time now )
 {
 
