@@ -46,13 +46,13 @@ typedef unsigned long SS_Time;  // time in ms since startup
 typedef void SS_ServoHandler( SS_Index servo, SS_Angle new_angle, void *data);
 
 // Rate is the time in ms it takes to move 1 degree 
-#define SS_RATE(ANGLE,MS)    (((MS)*10L)/(ANGLE))     // angles are in tenths of degrees
+#define SS_ANGLE_RATE(ANGLE,MS)    (((MS)*10L)/(ANGLE))     // angles are in tenths of degrees
 #define SS_DEGREES(D)        ((long)((D)*10))
 
 #define SS_FASTEST      1
-#define SS_FAST_RATE    SS_RATE(SS_DEGREES(180),1000)
-#define SS_NORMAL_RATE  SS_RATE(SS_DEGREES(180),3000)         // default rate - 180 degrees in 3 seconds
-#define SS_SLOW_RATE    SS_RATE(SS_DEGREES(180),8000)
+#define SS_FAST_RATE    SS_ANGLE_RATE(SS_DEGREES(180),1000)
+#define SS_NORMAL_RATE  SS_ANGLE_RATE(SS_DEGREES(180),3000)         // default rate - 180 degrees in 3 seconds
+#define SS_SLOW_RATE    SS_ANGLE_RATE(SS_DEGREES(180),8000)
 
 #define SS_NO_ANGLE     -1      
 
@@ -76,6 +76,7 @@ class SS_Servorator
   void setServoMaxRate( SS_Index servo, SS_AngleRate max );         // set max rate for all servos (in milliseconds per degree)
 
   SS_Angle getServoCurrentAngle( SS_Index servo);
+  SS_Angle getServoTargetAngle( SS_Index servo);
   SS_AngleRate getServoMaxRate( SS_Index servo );
 
   int numServos( void ) { return _num_servos;}

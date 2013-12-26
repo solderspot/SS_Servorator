@@ -156,6 +156,21 @@ SS_Angle SS_Servorator::getServoCurrentAngle( SS_Index index)
 //
 //----------------------------------------
 
+SS_Angle SS_Servorator::getServoTargetAngle( SS_Index index)
+{
+    SS_Servo *servo = get_servo(index);
+    if ( servo )
+    {
+        return servo->new_angle;
+    }
+
+    return SS_NO_ANGLE;
+}
+
+//----------------------------------------
+//
+//----------------------------------------
+
 SS_AngleRate SS_Servorator::getServoMaxRate( SS_Index index )
 {
     SS_Servo *servo = get_servo(index);

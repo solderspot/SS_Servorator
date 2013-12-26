@@ -64,11 +64,11 @@ void setup()
 
   // set all servos at 45 degrees
   // servo 0 is fastest
-  SS_Rate rate = SS_FAST_RATE;
+  SS_AngleRate rate = SS_FAST_RATE;
   for ( int i=0; i<NUM_SERVOS;i++)
   {
     sr.setServoAngle(i, SS_DEGREES(45)); 
-    sr.setServoMaxRate( rate );
+    sr.setServoMaxRate( i, rate );
     rate = rate * 2 ;
   }
 
@@ -95,6 +95,4 @@ void loop()
   // the servos are updated via update_servo()
   sr.service();
 }
-
-
 
