@@ -32,6 +32,8 @@
 #ifndef _SS_Servorator_H
 #define _SS_Servorator_H
 
+#define SS_ServoratorVersion        010000          // V1.0.0
+
 struct SS_Servo;     // private struct
 
 typedef long SS_AngleRate;       // number of milliseconds per degree
