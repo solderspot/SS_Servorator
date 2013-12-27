@@ -9,17 +9,17 @@ In your sketch you need to include the library so:
 
 	#import <SS_Servorator.h>
 
-Create an instance of SS_Servorator and pass in the number of servos it to control:
+Create an instance of SS_Servorator. Pass in the number of servos to control:
 
 	#define NUM_SERVOS  6
 
 	SS_Servorator sr(NUM_SERVOS);
 
-###Set Up
-
 You can create multiple instances if you needed to manage groups of servos.
 
-For each instance you create you need to provided a servo handling routine of type **SS_ServoHandler**:
+###Set Up
+
+Each instance requires a servo handling routine of type **SS_ServoHandler**:
 
 	// a servo handler for Servorator
 	void update_servo( SS_Index index, SS_Angle angle, void *data)
@@ -47,7 +47,7 @@ The servo handler routine needs to be registered with the Servorator instance us
   		:	
 	}
 
-The second parameter is a pointer to void. Whatever pointer you pass will in turn be passed through to the update routine in the 'data' param shown above. You can use that param to associate data with the handler.
+The second parameter is a pointer to void. Whatever pointer you pass will in turn be passed through to the update routine in the 'data' param shown above. You can use this param to associate user data with the handler.
 
 For the handler to get called you need to regularly call Servorator's **service()** function:
 
@@ -68,9 +68,9 @@ To move a servo to a new postion use **setServoTargetAngle()**:
 	// void setServoTargetAngle( SS_Index servo, SS_Angle new_angle )
     sr.setServoTargetAngle( 0, SS_DEGREES(175));
 
-The **SS_DEGREES()** macro helps make code a little more readable. You can also type SS_DEGREES(175.5) but keep in mind that Servorator is only accurate to a 1000th of a degree so SS_DEGREES(175.572987) is identical to SS_DEGREES(175.572).
+The **SS_DEGREES()** macro helps make coding a little more readable. You can also type SS_DEGREES(175.5) but keep in mind that Servorator is only accurate to a 1000th of a degree so SS_DEGREES(175.572987) is identical to SS_DEGREES(175.572).
 
-The max speed at which the servos turn is set using **setServoMaxVelocity()**:
+The max speed at which the servos will turn is set using **setServoMaxVelocity()**:
 
 	// void setServoMaxVelocity( SS_Index servo, SS_Velocity vel )
     sr.setServoMaxVelocity( 0, SS_DEGREES(60));
