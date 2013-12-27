@@ -44,13 +44,15 @@ SS_Servorator sr(NUM_SERVOS);
 // the servo handler for Servorator
 void update_servo( SS_Index index, SS_Angle angle, void *data)
 {
-  // SS_Angle is in tenths of a degree
-  //Serial.println(angle/10);
-  servo[index].write( angle/10);
+  // SS_Angle is in 1000th of a degree
+  //Serial.println(angle/1000);
+  servo[index].write( angle/1000);
 }
 
 void setup() 
 {
+
+  Serial.begin(9600);
   // assign PWM pins to servos
   servo[0].attach(3);
   servo[1].attach(5);
@@ -64,12 +66,12 @@ void setup()
 
   // set all servos at 45 degrees
   // servo 0 is fastest
-  SS_AngleRate rate = SS_FAST_RATE;
+  SS_Velocity vel = SS_FAST_RATE;
   for ( int i=0; i<NUM_SERVOS;i++)
   {
-    sr.setServoAngle(i, SS_DEGREES(45)); 
-    sr.setServoMaxRate( i, rate );
-    rate = rate * 2 ;
+    sr.setServoTargetAngle(i, SS_DEGREES(45)); 
+    sr.setServoMaxVelocity( i, vel );
+    vel = vel / 2 ;
   }
 
 }
@@ -80,15 +82,15 @@ void loop()
   // make servos ping-pong between 45 and 135 degrees
   for ( int i=0; i<NUM_SERVOS;i++)
   {
-    SS_Angle angle = sr.getServoCurrentAngle(i); 
+    SS_Angle angle = sr.getServoAngle(i); 
 
     if ( angle <= SS_DEGREES(45))
     { 
-      sr.setServoAngle(i, SS_DEGREES(135));
+      sr.setServoTargetAngle(i, SS_DEGREES(135));
     } 
     else if ( angle >= SS_DEGREES(135))
     { 
-      sr.setServoAngle(i, SS_DEGREES(45));
+      sr.setServoTargetAngle(i, SS_DEGREES(45));
     } 
   }
   // sr.service() needs to be called regularly so that
