@@ -2,6 +2,10 @@
 
 An Arduino library that provides simple speed control for servos.
 
+Servorator is written to be completely modular so that it can be 
+used with any servo interface. This also means that Servorator requires
+a little more work to set up and use.
+
 ##How To Use
 
 In your sketch you need to include the library so:
