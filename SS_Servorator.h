@@ -34,7 +34,7 @@
 #ifndef _SS_Servorator_H
 #define _SS_Servorator_H
 
-#define SS_ServoratorVersion        010100          // V1.1.0
+#define SS_ServoratorVersion        010200          // V1.1.0
 
 struct SS_Servo;     // private struct
 
