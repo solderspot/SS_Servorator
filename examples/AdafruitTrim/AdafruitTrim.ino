@@ -1,23 +1,27 @@
 //
 //  
-//  SimpleServoTrim.ino
+//  AdafruitTrim.ino
 //
-// Copyright (c) 2013-2014, Solder Spot
+// Copyright (c) 2014, Solder Spot
 // All rights reserved. 
 
 // This sketch requires the following libraries:
 //   SS_Servorator: https://github.com/solderspot/SS_Servorator
 //   SS_ServoTrim: https://github.com/solderspot/SS_ServoTrim
+//   Adafruit_PWMServoDriver: https://github.com/adafruit/Adafruit-PWM-Servo-Driver-Library
 
 // include needed librarys
-#include <Servo.h>
 #include <SS_Servorator.h>
 #include <SS_ServoTrim.h>
+#include <Wire.h>
+#include <Adafruit_PWMServoDriver.h>
 
+#define NUM_SERVOS 16
 
-#define NUM_SERVOS 6
+// create the servo driver instance
+// change 0x40 to match your servo shield if necessary
+Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver(0x40);  
 
-Servo servo[NUM_SERVOS];
 SS_Servorator sr(NUM_SERVOS);
 SS_ServoTrim trim(NUM_SERVOS);
 
@@ -28,7 +32,11 @@ void update_servo( SS_Index index, SS_Angle angle, void *data)
 
   long servo_index = trim.getServoNumber( index );
   long time = trim.getServoPulseTime(index, angle);
-  servo[servo_index].writeMicroseconds( time );
+
+  // 4096 ticks is 20,000 us (50Hz)
+  long ticks = (4096L*time)/20000L;
+  // update the servo channel with the new pusle
+  pwm.setPWM(servo_index, 0, ticks);
 
 }
 
@@ -36,20 +44,17 @@ void setup()
 {
 
   Serial.begin(9600);
-  // assign PWM pins to servos
-  servo[0].attach(3);
-  servo[1].attach(5);
-  servo[2].attach(6);
-  servo[3].attach(9);
-  servo[4].attach(10);
-  servo[5].attach(11);
-  
+
+  // init Adafruit's driver and set pulse frequency
+  pwm.begin();
+  pwm.setPWMFreq(50);  
+
   // register servo handler
   sr.setServoHandler( update_servo, NULL);
 
   // set all servos at 45 degrees
   // servo 0 is fastest
-  SS_Velocity vel = SS_FAST_RATE;
+  SS_Velocity vel = SS_FAST_RATE/2;
   for ( int i=0; i<NUM_SERVOS;i++)
   {
     sr.setServoTargetAngle(i, SS_DEGREES(45)); 
@@ -76,7 +81,6 @@ void setup()
   trim.setServoNumber( 4, 1);
   trim.setServoNumber( 5, 0);
 
-
 }
 
 // main loop
@@ -100,4 +104,5 @@ void loop()
   // the servos are updated via update_servo()
   sr.service();
 }
+
 

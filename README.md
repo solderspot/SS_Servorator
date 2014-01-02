@@ -1,12 +1,12 @@
 #SS_Servorator
 
-An Arduino library that provides simple speed control for servos.
+An Arduino library that provides speed control for servos. Currently only the velocity of movement is controlled. Acceleration control will be added soon.
 
 Servorator is written to be completely modular so that it can be 
 used with any servo interface. This also means that Servorator requires
 a little more work to set up and use.
 
-While Servorator operates purely within the logical angle range of 0 to 180, you can use the [**SS_ServoTrim**](https://github.com/solderspot/SS_ServoTrim) library to simplify adding support for fine tuning the actual physical pulse timings on a servo by servo basis. The library also provides the ability to dynamically remap servos and associate data with each servo.
+While Servorator operates purely within the logical angle range of 0 to 180, you can use the [**SS_ServoTrim**](https://github.com/solderspot/SS_ServoTrim) library to simplify adding support for fine tuning the actual physical pulse timings for each servo. That library also provides the ability to dynamically remap and associate data with each servo. See [SimpleServoTrim.ino](examples/SimpleServoTrim/SimpleServoTrim.ino) for an example.
 
 ##How To Use
 
@@ -97,7 +97,7 @@ You can read the current and target servo angles using **getServoAngle** and **g
 
 ##Example
 
-SimpleServo.ino example:
+The library includes the **[SimpleServo.ino](examples/SimpleServo/SimpleServo.ino)** example:
 
     // include needed librarys
     #include <Servo.h>
@@ -165,5 +165,11 @@ SimpleServo.ino example:
     }
 
 
+##Other Examples
 
+The library also includes these examples.
+
+ * **[SimpleServoTrim.ino](examples/SimpleServoTrim/SimpleServoTrim.ino)** - A version of the SimpleServo.ino example that uses the **SS_ServoTrim** library to adjust servo pulse ranges and perform servo mappings.
+ 
+ * **[AdafruitTrim.ino](examples/AdafruitTrim/AdafruitTrim.ino)** - A version of SimpleServoTrim.ino that uses Adafruit's servo shield to drive the servos.
 
