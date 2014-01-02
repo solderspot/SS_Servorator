@@ -6,6 +6,8 @@ Servorator is written to be completely modular so that it can be
 used with any servo interface. This also means that Servorator requires
 a little more work to set up and use.
 
+While Servorator operates purely within the logical angle range of 0 to 180, you can use the [**SS_ServoTrim**](https://github.com/solderspot/SS_ServoTrim) library to simplify adding support for fine tuning the actual physical pulse timings on a servo by servo basis. The library also provides the ability to dynamically remap servos and associate data with each servo.
+
 ##How To Use
 
 In your sketch you need to include the library so:

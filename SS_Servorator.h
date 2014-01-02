@@ -53,7 +53,9 @@ typedef void SS_ServoHandler( SS_Index servo, SS_Angle new_angle, void *data);
 
 
 // useful macros
+#ifndef SS_DEGRESS
 #define SS_DEGREES(D)        ((long)(((long)(D))*1000L))
+#endif
 
 #define SS_FAST_RATE    SS_DEGREES(180)             // 180 degrees per second
 #define SS_NORMAL_RATE  SS_DEGREES(60)              // default rate - 60 dps
@@ -64,7 +66,9 @@ typedef void SS_ServoHandler( SS_Index servo, SS_Angle new_angle, void *data);
 #define SS_SLOW_ACCEL   SS_DEGREES(15)              // 15 dpsps
 
 #define SS_NO_ANGLE     -1      
-#define SS_ALL          -1      
+#ifndef SS_ALL
+#define SS_ALL          -1
+#endif
 
 class SS_Servorator 
 {
