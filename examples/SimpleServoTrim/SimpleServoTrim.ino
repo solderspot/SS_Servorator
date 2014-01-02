@@ -76,7 +76,7 @@ void setup()
   trim.setServoNumber( 4, 1);
   trim.setServoNumber( 5, 0);
 
-
+  Serial.println("SimpleServoTrim Ready!");
 }
 
 // main loop

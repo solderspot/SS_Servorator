@@ -51,6 +51,7 @@ void setup()
     vel = vel / 2 ;
   }
 
+  Serial.println("SimpleServo Ready!");
 }
 
 // main loop
